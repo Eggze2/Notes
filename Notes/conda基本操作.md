@@ -114,9 +114,9 @@ pip换源：>>
 
 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
 
-华中理工大学：http://pypi.hustunique.com/
+华中理工大学：http://pypi.hustunique.com/ --trusted-host pypi.hustunique.com
 
-山东理工大学：http://pypi.sdutlinux.org/ 
+山东理工大学：http://pypi.sdutlinux.org/ --trusted-host pypi.sdutlinux.org
 
 pip临时使用：>>pip install pythonModuleName -i <换源地址>
 
