@@ -1,6 +1,6 @@
 首先是Nano的引脚简图
 
-![20190711204826407.png](https://github.com/Eggze2/md_pic/blob/main/Nano%E5%AD%A6%E4%B9%A0/20190711204826407.png?raw=true)
+![20190711204826407.png](https://github.com/Eggze2/md_pic/blob/main/Notes/ROS/Nano%E5%BC%95%E8%84%9A%E5%AE%9A%E4%B9%89/20190711204826407.png?raw=true)
 
 ATmega328P 总共32个引脚，有三组功能接口，分别为PortB、PortC、PortD。单片机引脚数量有限，都是多个功能共同复用同一个引脚，通过软件配置来实现特定的功能
 

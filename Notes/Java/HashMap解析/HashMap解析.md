@@ -21,7 +21,7 @@
 　　
 这个函数可以简单描述为：**存储位置 = f(关键字)** ，这个函数f一般称为哈希函数，这个函数的设计好坏会直接影响到哈希表的优劣。举个例子，比如我们要在哈希表中执行插入操作：
 插入过程如下图所示
-![1024555-20161113180447499-1953916974.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/1024555-20161113180447499-1953916974.png?raw=true)
+![1.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/1.png?raw=true)
 
 查找操作同理，先通过哈希函数计算出实际存储地址，然后从数组中对应地址取出即可。
 
@@ -92,7 +92,7 @@ Entry是HashMap中的一个静态内部类。代码如下
 ```
 
 所以，HashMap的总体结构如下：
-![20181102221702492.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/20181102221702492.png?raw=true)
+![2.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/2.png?raw=true)
 
 简单来说，**HashMap由数组+链表组成的**，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的，如果定位到的数组位置不含链表（当前entry的next指向null）,那么查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，**HashMap中的链表出现越少，性能才会越好。**
 
@@ -227,7 +227,7 @@ h&（length-1）保证获取的index一定在数组范围内，举个例子，�
 ```
 
 所以最终存储位置的确定流程是这样的：
-![20181102214046362.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/20181102214046362.png?raw=true)
+![3.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/3.png?raw=true)
 
 再来看看addEntry的实现：
 
@@ -291,13 +291,13 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 HashMap的数组长度一定保持2的次幂，比如16的二进制表示为 10000，那么length-1就是15，二进制为01111，同理扩容后的数组长度为32，二进制表示为100000，length-1为31，二进制表示为011111。从下图可以我们也能看到这样会保证低位全为1，而扩容后只有一位差异，也就是多出了最左位的1，这样在通过 h&(length-1)的时候，只要h对应的最左边的那一个差异位为0，就能保证得到的新的数组索引和老数组索引一致(大大减少了之前已经散列良好的老数组的数据位置重新调换)，个人理解。
 
-![1024555-20161115215812138-679881037.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/1024555-20161115215812138-679881037.png?raw=true)
+![4.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/4.png?raw=true)
 
 还有，数组长度保持2的次幂，length-1的低位都为1，会使得获得的数组索引index更加均匀
 
-![1024555-20161116001404732-625340289.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/1024555-20161116001404732-625340289.png?raw=true)
+![5.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/5.png?raw=true)
 我们看到，上面的&运算，高位是不会对结果产生影响的（hash函数采用各种位运算可能也是为了使得低位更加散列)，我们只关注低位bit，如果低位全部为1，那么对于h低位部分来说，任何一位的变化都会对结果产生影响，也就是说，要得到index=21这个存储位置，h的低位只有这一种组合。这也是数组长度设计为必须为2的次幂的原因。
-![1024555-20161116001717560-1455096254.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/1024555-20161116001717560-1455096254.png?raw=true)
+![6.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/6.png?raw=true)
 如果不是2的次幂，也就是低位不是全为1此时，要使得index=21，h的低位部分不再具有唯一性了，哈希冲突的几率会变的更大，同时，index对应的这个bit位无论如何不会等于1了，而对应的那些数组位置也就被白白浪费了。
 
 **get方法**：
@@ -407,9 +407,11 @@ TreeNode <K,V> extends Entry<K,V> extends Node<K,V>
 
 在无参构造函数时，JDK8仅仅是初始化loadFactor让其等于默认值。Map通过构造函数new一个HashMap时，其内部存储数据的数组并没有实例化，而是在PUT方法中去做了一件判断table是否为空的事，若为空就会调用resize()方法，resize()第一次调用就会实例化一个长度为DEFAULT_INITIAL_CAPACITY的Node[]。
 
-![20190720113958166.png](https://github.com/Eggze2/md_pic/blob/main/HashMap%E8%A7%A3%E6%9E%90/20190720113958166.png?raw=true)
+![7.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/7.png?raw=true)
 
 **1、 put(K key,V value)**
+
+![8.png](https://github.com/Eggze2/md_pic/blob/main/Notes/Java/HashMap%E8%A7%A3%E6%9E%90/8.png?raw=true)
 
 ```java
 //对外开发使用
