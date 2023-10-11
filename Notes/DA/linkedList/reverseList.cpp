@@ -27,4 +27,13 @@ public:
     ListNode* reverseList(ListNode* head) {
         return reverse(nullptr, head);
     }
+    // 从后往前翻转
+    ListNode* reverseList(ListNode* head) {
+        // 边缘条件判断
+        if (head == nullptr) return nullptr;
+        if (head->next == nullptr) return head;
+        ListNode* last = reverseList(head->next);
+        head->next->next = head;
+        return last;
+    }
 };
