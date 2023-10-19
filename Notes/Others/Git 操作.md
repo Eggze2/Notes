@@ -1,6 +1,58 @@
 # Git 操作
+- [Git 操作](#git-操作)\
+      - [用户设置](#用户设置)\
+      - [文件操作](#文件操作)\
+      - [重命名文件](#重命名文件)\
+      - [更新远程代码到本地仓库](#更新远程代码到本地仓库)\
+      - [解决Failed to connect to github.com port 443: Operation timed out](#解决failed-to-connect-to-githubcom-port-443-operation-timed-out)
 
-#### 文件移动
+#### 用户设置
+
+`git config` 命令用于配置Git的设置，包括用户信息、仓库设置等。Git支持多个配置级别，每个级别对应了不同的范围，以便在不同的上下文中使用。以下是 `git config` 的各个配置级别：
+
+1. **系统级别（System-Level）**:
+   这是Git配置的最高级别，通常位于Git安装目录下的全局配置文件。它适用于整个系统中的所有用户，对所有仓库生效。
+
+   设置系统级别的用户名和邮箱：
+     ```bash
+     git config --system user.name "Your Name"
+     git config --system user.email "your.email@example.com"
+     ```
+
+   请注意，设置系统级别配置需要管理员权限。
+
+2. **全局级别（Global-Level）**:
+   全局级别配置存储在用户的主目录下的 `.gitconfig` 文件中。这些设置适用于当前用户的所有Git仓库。
+
+   设置全局级别的用户名和邮箱：
+     ```bash
+     git config --global user.name "Your Name"
+     git config --global user.email "your.email@example.com"
+     ```
+
+3. **仓库级别（Repository-Level）**:
+   仓库级别配置存储在特定Git仓库的 `.git/config` 文件中。这些设置仅适用于当前仓库。
+
+   设置仓库级别的用户名和邮箱：
+     ```bash
+     git config user.name "Your Name"
+     git config user.email "your.email@example.com"
+     ```
+
+4. **命令行级别（Command-Line-Level）**:
+   有时，你可以在命令行中直接使用`--global`或`--system`选项，来设置全局或系统级别的配置。这将覆盖之前的配置。
+
+   例如，设置全局级别的用户名和邮箱：
+     ```bash
+     git config --global user.name "Your New Name"
+     git config --global user.email "new.email@example.com"
+     ```
+
+请注意，配置级别具有优先级，高级别的配置会覆盖低级别的配置。如果在仓库级别设置了某个配置项，它将覆盖全局级别或系统级别的相同配置项。
+
+可以使用 `git config --list` 命令来查看当前配置的详细信息，包括所有级别的配置项
+
+#### 文件操作
 
 大多数文件可直接通过GUI操作，但某些文件（如图像）要求从命令行移动它们
 

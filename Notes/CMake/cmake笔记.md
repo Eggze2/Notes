@@ -146,7 +146,7 @@ ADD_EXECUTABLE(hello main.cpp)
 ### 语法注意事项
 
 - SET(SRC_LIST main.cpp) 可以写成 SET(SRC_LIST “main.cpp”)，如果源文件名中含有空格，就必须要加双引号
-- ADD_EXECUTABLE(hello main) 后缀可以不行，他会自动去找.c和.cpp，最好不要这样写，可能会有这两个文件main.cpp和main
+- ADD_EXECUTABLE(hello main) 后缀可以不加，他会自动去找.c和.cpp，最好不要这样写，可能会有这两个文件main.cpp和main
 
 ## 内部构建和外部构建
 
@@ -240,7 +240,7 @@ SET(LIBRARY_OUTPUT_PATH {PROJECT_BINARY_DIR}/lib)
 ## 安装
 
 - 一种是从代码编译后直接 make install 安装
-- 一种是打包时的指定 目录安装。
+- 一种是打包时的指定目录安装。
     - 简单的可以这样指定目录：make install DESTDIR=/tmp/test
     - 稍微复杂一点可以这样指定目录：./configure –prefix=/usr
 
@@ -493,10 +493,6 @@ PS：include <hello/hello.h>  这样include是可以，这么做的话，就没�
 在CMakeLists.txt中加入头文件搜索路径
 
 INCLUDE_DIRECTORIES(/usr/include/hello)
-
-感谢：
-
-网友：zcc720的提醒
 
 #### 解决：找到引用的函数问题
 

@@ -16,8 +16,8 @@
 
 例如，考虑以下示例：
 
-```
-cppCopy codeclass MyClass {
+```cpp
+class MyClass {
 public:
     int publicVar;
     
@@ -45,8 +45,8 @@ protected:
 
 当我们在类的内部访问私有成员时，可以使用类的成员函数来间接访问私有成员。以下是一个示例：
 
-```
-cppCopy code#include <iostream>
+```cpp
+#include <iostream>
 
 class MyClass {
 private:
@@ -87,8 +87,8 @@ int main() {
 
 考虑以下示例：
 
-```
-cppCopy code#include <iostream>
+```cpp
+#include <iostream>
 
 class Base {
 protected:
