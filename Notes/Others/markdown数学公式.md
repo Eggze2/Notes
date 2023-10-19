@@ -66,8 +66,9 @@
 | $\sigma$   | `\sigma`   | $\Sigma$   | `\Sigma`   | $\tau$     | `\tau`     | $\Tau$     | `\Tau`     |
 | $\upsilon$ | `\upsilon` | $\Upsilon$ | `\Upsilon` | $\phi$     | `\phi`     | $\Phi$     | `\Phi`     |
 | $\chi$     | `\chi`     | $\Chi$     | `\Chi`     | $\psi$     | `\psi`     | $\Psi$     | `\Psi`     |
-| $omega$    | `omega`    | $\Omega$   | `\Omega`   | $\omicron$ | `\omicron` | $\Omicron$ | `\Omicron` |
+| $omega$    | `\omega`    | $\Omega$   | `\Omega`   | $\omicron$ | `\omicron` | $\Omicron$ | `\Omicron` |
 
+Markdown中无法显示完整的$Latex$语法，故部分大写字母直接以英文大写字母代替，此处保留$Latex$语法作为参考。
 若需要斜体希腊字母，加上前缀`var`。如`\varDelta`显示为$varDelta$。
 
 ## 算术运算
@@ -314,7 +315,7 @@ $$
 **添加括号：**
 
 - `pmatrix`()()
-- `bmatrix`[ ][ ]
+- `bmatrix` [ ][ ]
 - `Bmatrix`{ }{ }
 - `vmatrix`| || |
 - `Vmatrix`∥ ∥‖ ‖
@@ -458,7 +459,7 @@ $$
 
 ## 编号
 
-**语法：**`\tag`。
+**语法：**`\tag`
 
 **示例：**
 
