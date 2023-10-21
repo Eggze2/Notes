@@ -9,6 +9,7 @@ class Solution {
         }
         return sum;
     }
+    
     bool isHappy(int n) {
         std::unordered_set<int> set;
         while (1) {
