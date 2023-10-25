@@ -23,6 +23,8 @@ public:
             }
             std::unordered_set<int> set;
             for (int j = i + 1; j < nums.size(); j++) {
+                // j > i + 2 用于避免检查当前元素 j 与前两个元素 j-1 和 j-2 是否相同，
+                // 因为 j-1 和 j-2 的情况已经在之前的迭代中处理过
                 if (j > i + 2
                         && nums[j] == nums[j-1]
                         && nums[j-1] == nums[j-2]) { // 三元组元素b去重
