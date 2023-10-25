@@ -11,7 +11,7 @@ public:
             if (nums[i] > 0) {
                 break;
             }
-            if (i > 0 && nums[i] == nums[i - 1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) { // 三元组元素a去重
                 continue;
             }
             std::unordered_set<int> set;
