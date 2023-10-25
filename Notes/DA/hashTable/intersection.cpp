@@ -8,11 +8,15 @@ class Solution {
         for (int num : nums2) {
             if (nums_set.find(num) != nums_set.end()) {
                 /*
-                nums_set.find(num) 返回一个迭代器，这个迭代器指向 num 在 nums_set 中的位置。
-                如果 num 存在于 nums_set 中，迭代器将指向 num，否则，迭代器将指向 nums_set.end()，
-                表示未找到。nums_set.end()：end() 函数返回一个迭代器，指向无序集合的末尾位置。
+                nums_set.find(num) 返回一个迭代器，
+                这个迭代器指向 num 在 nums_set 中的位置。
+                如果 num 存在于 nums_set 中，迭代器将指向 num，
+                否则，迭代器将指向 nums_set.end()，表示未找到。
+                nums_set.end()：end() 函数返回一个迭代器，
+                指向无序集合的末尾位置。
                 如果 find 函数没有找到元素，它会返回 nums_set.end()。
-                if (nums_set.find(num) != nums_set.end())：这个条件语句检查 num 是否存在于 nums_set 中。
+                if (nums_set.find(num) != nums_set.end())：
+                这个条件语句检查 num 是否存在于 nums_set 中。
                 如果 num 存在，nums_set.find(num) 将返回指向 num 的迭代器，
                 所以条件成立，执行下面的代码块
                 */
