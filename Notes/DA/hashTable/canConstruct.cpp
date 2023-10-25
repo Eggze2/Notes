@@ -16,6 +16,7 @@ public:
         }
         return false;
     }
+    // Hash
     bool canConstruct(std::string ransomNote, std::string magazine) {
         int record[26] = {0};
         if (ransomNote.size() > magazine.size()) {
