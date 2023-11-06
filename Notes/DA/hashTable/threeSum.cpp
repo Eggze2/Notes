@@ -10,7 +10,7 @@
 #include <unordered_set>
 class Solution {
 public:
-    // Hash
+    // Hash(not recomended)
     std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
         std::vector<std::vector<int>> result;
         std::sort(nums.begin(), nums.end());
@@ -36,6 +36,36 @@ public:
                     set.erase(c);// 三元组元素c去重
                 } else {
                     set.insert(nums[j]);
+                }
+            }
+        }
+        return result;
+    }
+    // 双指针
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        std::vector<std::vector<int>> result;
+        sort(nums.begin(), nums.end());
+        // 找出a + b + c = 0
+        // a = nums[i], b = nums[left], c = nums[right]
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] > 0) {
+                return result;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i + 1;
+            int right = nums.size() - 1;
+            while (right > left) {
+                if (nums[i] + nums[left] + nums[right] > 0) right--;
+                else if (nums[i] + nums[left] + nums[right] < 0) left++;
+                else {
+                    result.push_back(std::vector<int>{nums[i], nums[left], nums[right]});
+                    while (right > left && nums[right] == nums[right - 1]) right--;
+                    while (right > left && nums[left] == nums[left + 1]) left--;
+
+                    right--;
+                    left++;
                 }
             }
         }
