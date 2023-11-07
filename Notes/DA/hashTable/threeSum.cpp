@@ -10,14 +10,18 @@
 #include <unordered_set>
 class Solution {
 public:
-    // Hash(not recomended)
+    // Hash(Very complicated, not recomended)
     std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
         std::vector<std::vector<int>> result;
         std::sort(nums.begin(), nums.end());
+        // 排序之后如果第一个元素已经大于零，那么无论如何组合都不可能凑成三元组，直接返回结果就可以了
         for (int i = 0; i < nums.size(); i++) {
             if (nums[i] > 0) {
                 break;
             }
+            // 当前使用 nums[i]，我们判断前一位是不是一样的元素，
+            // 再看 {-1, -1 ,2} 这组数据，当遍历到 第一个 -1 的时候，
+            // 只要前一位没有-1，那么 {-1, -1 ,2} 这组数据一样可以收录到结果集里
             if (i > 0 && nums[i] == nums[i - 1]) { // 三元组元素a去重
                 continue;
             }
@@ -63,7 +67,7 @@ public:
                     result.push_back(std::vector<int>{nums[i], nums[left], nums[right]});
                     while (right > left && nums[right] == nums[right - 1]) right--;
                     while (right > left && nums[left] == nums[left + 1]) left--;
-
+                    // 找到答案时，双指针同时收缩
                     right--;
                     left++;
                 }
