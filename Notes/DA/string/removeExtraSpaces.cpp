@@ -26,10 +26,10 @@ public:
     }
 
     void removeExtraSpaces(std::string& s) { // 去除所有空格并在相邻单词之间添加空格，快慢指针
-        int slow;
+        int slow = 0;
         for (int i = 0; i < s.size(); ++i) {
-            if (s[i] != ' ') {
-                if (slow != 0) s[slow++] = ' ';
+            if (s[i] != ' ') {  // 遇到非空格就处理，即删除所有空格
+                if (slow != 0) s[slow++] = ' '; // 最开始遇到空格不处理
                 while (i < s.size() && s[i] != ' ') {
                     s[slow++] = s[i++];
                 }
