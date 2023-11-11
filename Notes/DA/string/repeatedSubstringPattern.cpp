@@ -1,12 +1,12 @@
 #include <string>
 class Solution {
 public:
-// 前缀表统一减一
+    // 前缀表统一减一
     void getNext(int* next, const std::string& s) {
         next = new int[s.size()];
         int j = -1;
         next[0] = -1;
-        for (int i = 0; i < s.size(); i++) {
+        for (int i = 1; i < s.size(); i++) {
             while (j >= 0 && s[i] != s[j + 1]) {
                 j = next[j];
             }
@@ -33,7 +33,7 @@ public:
         next = new int[s.size()];
         int j = 0;
         next[0] = 0;
-        for(int i = 1;i < s.size(); i++){
+        for(int i = 1; i < s.size(); i++){
             while(j > 0 && s[i] != s[j]) {
                 j = next[j - 1];
             }
