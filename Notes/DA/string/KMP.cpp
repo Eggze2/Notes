@@ -37,10 +37,10 @@ public:
     // 实现KMP算法来找出needle字符串在haystack字符串中的第一个匹配项的下标
     int strStr(const std::string& haystack, const std::string& needle) {
         if (needle.empty()) return 0;   // 如果needle为空字符串，则返回0
-        if (haystack.length() < needle.length()) return -1; // 如果haystack比needle短，则返回-1。PS：其实也可以值判断半长
+        if (haystack.length() < needle.length()) return -1; // 如果haystack比needle短，则返回-1。PS：其实也可以通过半长判断
 
-        int M = needle.length();
         int N = haystack.length();
+        int M = needle.length();
 
         std::vector<int> lps(M);
         computeLPSArray(needle, lps);   // 计算lps数组
@@ -84,7 +84,7 @@ public:
             // next[j] 就是记录着j（包括j）之前的子串的相同前后缀的长度。
             // 那么 s[i] 与 s[j+1] 不相同，就要找j+1前一个元素在next数组里的值（就是next[j]）
             while (j >= 0 && s[i] != s[j + 1]) {
-                j = next[j];
+                j = next[j];    // 向前回退
             }
             // 3. 处理前后缀相同的情况
             // 如果 s[i] 与 s[j + 1] 相同，那么就同时向后移动i和j说明找到了相同的前后缀，
@@ -95,10 +95,8 @@ public:
             next[i] = j;
         }
     }
-    int strStr(std::string haystack, std::string needle) {
-        if (needle.size() == 0) {
-            return 0;
-        }
+    int strStr(std::string haystack, std::string needle) {            
+        if (needle.size() == 0) return 0;
         int* next;
         getNext(next, needle);
         int j = -1;
