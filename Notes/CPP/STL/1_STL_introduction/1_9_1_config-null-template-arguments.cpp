@@ -42,7 +42,7 @@ bool operator<(const stack<T, Sequence> &x,
 template <class T, class Sequence = deque<T>>
 class stack {
     // 以下三种写法都可以，即标注模板的使用
-    friend bool operator== <T> (const stack<T> &, const stack<T>&);
+    friend bool operator== <T> (const stack<T> &, const stack<T> &);
     friend bool operator< <T> (const stack<T> &, const stack<T> &);
 
     friend bool operator== <T> (const stack &, const stack &);
@@ -82,6 +82,9 @@ bool operator<(const stack<T, Sequence> &x,
 }
 
 int main() {
+    // stack类模板中的私有成员 Sequence c; 是一个deque类对象（因为默认情况下 Sequence 被定义为 deque<T>）。 
+    // 当 stack 对象被创建时，会调用 deque 的构造函数，其中包含一行输出语句 cout << "deque" << " ";
+    // 因此在 stack 对象创建时也会输出 "deque"
     stack<int> x;
     stack<int> y;
 
@@ -90,5 +93,5 @@ int main() {
 
     stack<char> y1;
     // error: no match for 'operator==' (operand types are 'stack<int>' and 'stack<char>')
-    // cout << (x == y1) << endl; 
+    // cout << (x == y1) << endl;
 }
