@@ -1,2 +1,2 @@
 # md_pic
-## A backup file for CS learning notes. ##
+## A repository for storing notes ##
