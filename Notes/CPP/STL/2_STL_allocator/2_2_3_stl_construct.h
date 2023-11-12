@@ -60,7 +60,8 @@ inline void _Destroy(_Tp* __pointer) {
   __pointer->~_Tp();  // 调用dtor ~T()
 }
 
-
+
+
 // 如果元素value type 有 non-trivial destructor
 template <class _ForwardIterator>
 void

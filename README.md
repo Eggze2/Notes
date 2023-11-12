@@ -1,2 +1,2 @@
-# md_pic
+# Notes
 ## A repository for storing notes ##
