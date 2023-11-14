@@ -19,15 +19,17 @@ public:
     
     // 前置返回原对象，后置返回值（新创建）
 
-    // prefix increment
+    // prefix : increment and then fetch
     INT& operator++() {
         ++(this->m_i);
         return *this;
     }
 
-    // postfix increment 需要占位符int
+    // postfix : fetch and then increment 
+    // 需要占位符int
     INT operator++(int) {
         INT temp = *this;
+        cout<< temp << "\n";
         ++(*this); // 调用前置++
         return temp;
     }
@@ -46,15 +48,15 @@ public:
     }
 
     // dereference   
-    // const后置修饰函数表示为常函数，不能修改成员变量
+    // const 后置修饰函数表示为常函数，不能修改成员变量
     // 但能修改mutable修饰的成员变量
     int& operator*() const {
         // error: binding reference of type 'int&' to 'const int' discards qualifiers
         // return m_i;
 
         return (int &)m_i;
-        //以上转换动作告诉编译器，你确实要将 const int转为 non-const lvalue. 
-        // 如果没有这样明白㆞转型，有些编译器会给你警告，有些更严格的编译器会视为错误
+        // 以上转换动作告诉编译器，你确实要将 const int 转为 non-const lvalue. 
+        // 如果没有这样明白地转型，有些编译器会给你警告，有些更严格的编译器会视为错误
     }
 
 private:
