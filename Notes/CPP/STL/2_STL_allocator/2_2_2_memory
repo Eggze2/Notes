@@ -16,10 +16,20 @@
 #define __SGI_STL_MEMORY
 
 #include <stl_algobase.h>
-#include <stl_alloc.h> // 这里定义有一、二级配置器，彼此合作。配置器名为  alloc。
-#include <stl_construct.h> // 这里定义有全域函式construct()和  destroy()，负责物件的建构和解构。它们隶属于  STL  标准规范。
+#include <stl_alloc.h> // 这里定义有一、二级配置器，彼此合作。配置器名为 alloc。
+#include <stl_construct.h> // 这里定义有全局函数 construct() 和 destroy() ，负责对象的构造和析构。它们隶属于 STL 标准规范。
 #include <stl_tempbuf.h>
-#include <stl_uninitialized.h> // 这里定义有全域函式，用来充填（fill）或复制（copy）大块内存内容，它们也都隶属于  STL  标准规范
+#include <stl_uninitialized.h> // 这里定义有全局函数，用来充填（fill）或复制（copy）大块内存内容，它们也都隶属于 STL 标准规范
+/**
+ * un_initialized_copy()
+ * un_initialized_fill()
+ * un_initialized_fill_n()
+ * 这些函数不属于 allocator 的范畴， 但与对象处置设置有关。
+ * 对于函数的大规模元素初值设置很有帮助。
+ * 这些函数对于效率都有面面俱到的考虑，
+ * 最差的情况下会调用 construct()， 最佳的情况则会使用 C 标准函数 memmove()
+ * 直接进行内存数据的移动。
+*/
 #include <stl_raw_storage_iter.h>
 
 
