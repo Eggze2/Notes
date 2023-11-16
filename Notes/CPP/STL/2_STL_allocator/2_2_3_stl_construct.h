@@ -31,7 +31,7 @@
 #ifndef __SGI_STL_INTERNAL_CONSTRUCT_H
 #define __SGI_STL_INTERNAL_CONSTRUCT_H
 
-#include <new.h> // 使用placement new
+#include <new.h> // 欲使用 placement new，需先包含此文件
 
 __STL_BEGIN_NAMESPACE
 
@@ -43,9 +43,10 @@ __STL_BEGIN_NAMESPACE
 
 // Internal names
 
+// 将初值设定到指针所指的空间上
 template <class _T1, class _T2>
 inline void _Construct(_T1* __p, const _T2& __value) {
-  new ((void*) __p) _T1(__value);  // placement new; 唤起T1::T1(value)
+  new ((void*) __p) _T1(__value);  // placement new; 调用 T1::T1(value)
 }
 
 template <class _T1>
@@ -53,45 +54,37 @@ inline void _Construct(_T1* __p) {
   new ((void*) __p) _T1();
 }
 
-
 // 第一个版本，接受一个参数
 template <class _Tp>
 inline void _Destroy(_Tp* __pointer) {
-  __pointer->~_Tp();  // 调用dtor ~T()
+  __pointer->~_Tp();  // 调用 dtor ~T()
 }
 
-
-
-// 如果元素value type 有 non-trivial destructor
+// 第二个版本，接受两个迭代器，函数设法找出元素类别，进而利用 __type_traits<> 使用最佳措施
 template <class _ForwardIterator>
-void
-__destroy_aux(_ForwardIterator __first, _ForwardIterator __last, __false_type)
+inline void _Destroy(_ForwardIterator __first, _ForwardIterator __last) {
+  __destroy(__first, __last, __VALUE_TYPE(__first));
+}
+
+// 判断元素 value type 是否有 trivial destructor
+template <class _ForwardIterator, class _Tp>
+inline void __destroy(_ForwardIterator __first, _ForwardIterator __last, _Tp*)
+{
+  typedef typename __type_traits<_Tp>::has_trivial_destructor _Trivial_destructor;
+  __destroy_aux(__first, __last, _Trivial_destructor());
+}
+
+// 如果元素 value type 有 non-trivial destructor
+template <class _ForwardIterator>
+void __destroy_aux(_ForwardIterator __first, _ForwardIterator __last, __false_type)
 {
   for ( ; __first != __last; ++__first)
     destroy(&*__first);
 }
 
-// 如果元素value type 有 trivial destructor
+// 如果元素 value type 有 trivial destructor
 template <class _ForwardIterator> 
 inline void __destroy_aux(_ForwardIterator, _ForwardIterator, __true_type) {}
-
-
-// 判断元素value type是否有trivial destructor
-template <class _ForwardIterator, class _Tp>
-inline void 
-__destroy(_ForwardIterator __first, _ForwardIterator __last, _Tp*)
-{
-  typedef typename __type_traits<_Tp>::has_trivial_destructor
-          _Trivial_destructor;
-  __destroy_aux(__first, __last, _Trivial_destructor());
-}
-
-
-// 第二个版本，接受两个迭代器，函数设法找出元素类别，进而利用 __type_traits<>使用最佳措施
-template <class _ForwardIterator>
-inline void _Destroy(_ForwardIterator __first, _ForwardIterator __last) {
-  __destroy(__first, __last, __VALUE_TYPE(__first));
-}
 
 // destroy()特化版
 inline void _Destroy(char*, char*) {}

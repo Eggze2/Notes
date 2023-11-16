@@ -105,7 +105,7 @@ __STL_BEGIN_NAMESPACE
 # endif
 #endif
 
-//㆒般而言是 thread-safe，并且对于空间的运用比较高效（efficient）。
+//一般而言是 thread-safe，并且对于空间的运用比较高效（efficient）。
 //以下是第一级配置器。
 //注意，无「template型别参数」。至于「非型别参数」inst，完全没派上用场。
 template <int __inst>
@@ -113,6 +113,7 @@ class __malloc_alloc_template {
 
 private:
 // 函数指针，处理内存不足情况
+// oom: out of memory.
   static void* _S_oom_malloc(size_t);
   static void* _S_oom_realloc(void*, size_t);
 
@@ -164,8 +165,7 @@ void (* __malloc_alloc_template<__inst>::__malloc_alloc_oom_handler)() = 0;
 #endif
 
 template <int __inst>
-void*
-__malloc_alloc_template<__inst>::_S_oom_malloc(size_t __n)
+void* __malloc_alloc_template<__inst>::_S_oom_malloc(size_t __n)
 {
     void (* __my_malloc_handler)();
     void* __result;
@@ -199,7 +199,26 @@ typedef __malloc_alloc_template<0> malloc_alloc;
 
 template<class _Tp, class _Alloc>
 class simple_alloc {
-
+/**
+ * simple_alloc 类使用静态函数来处理内存分配和释放，原因有几个：
+ * 无需类实例：静态函数不依赖于类的实例来执行。
+ * 由于内存分配和释放通常是与特定对象无关的操作，
+ * 因此这些函数被设计为静态，使它们可以在没有创建 simple_alloc 类实例的情况下被调用。
+ * 这样做减少了不必要的对象实例化，从而简化了内存管理操作。
+ * 通用性和重用性：静态成员函数可以被认为是属于整个类而不是某个特定实例。
+ * 这使得内存分配和释放函数更加通用，可以被任何需要这些功能的代码重用，
+ * 而不是绑定在特定的对象实例上。
+ * 抽象和封装：通过使用静态函数，simple_alloc 类封装了内存分配的具体细节。
+ * 这种设计允许开发者更改内存分配策略而不影响使用这些函数的代码，
+ * 因为它们的接口保持不变。
+ * 效率：静态函数通常比非静态成员函数更高效，因为它们不需要访问对象的实例成员。
+ * 在内存分配这样对性能要求较高的操作中，这一点尤为重要。
+ * 模板类的特性：由于 simple_alloc 是一个模板类，
+ * 其静态函数可以直接使用类模板参数（如 _Tp 和 _Alloc），
+ * 这为不同类型的内存管理提供了灵活性。
+ * 总之，这种设计使得 simple_alloc 成为一个高效、灵活且易于使用的内存管理工具，
+ * 它通过静态函数提供了一个简单的接口来进行内存分配和释放，同时隐藏了底层的复杂性。
+*/
 public:
     static _Tp* allocate(size_t __n)
       { return 0 == __n ? 0 : (_Tp*) _Alloc::allocate(__n * sizeof (_Tp)); }
@@ -305,9 +324,9 @@ private:
   // Really we should use static const int x = N
   // instead of enum { x = N }, but few compilers accept the former.
 #if ! (defined(__SUNPRO_CC) || defined(__GNUC__))
-    enum {_ALIGN = 8};
-    enum {_MAX_BYTES = 128};
-    enum {_NFREELISTS = 16}; // _MAX_BYTES/_ALIGN
+    enum {_ALIGN = 8};  // 小型区块的上调边界
+    enum {_MAX_BYTES = 128};  // 小型区块的上届
+    enum {_NFREELISTS = _MAX_BYTES/_ALIGN}; // 16: free-list 个数
 # endif
   // 向上取整至8的倍数（取反加一的逆操作）
   static size_t
@@ -315,7 +334,7 @@ private:
     { return (((__bytes) + (size_t) _ALIGN-1) & ~((size_t) _ALIGN - 1)); }
 
 __PRIVATE:
-  // 节点构造
+  // free-list 的节点构造
   union _Obj {
         union _Obj* _M_free_list_link;
         char _M_client_data[1];    /* The client sees this.        */
@@ -330,21 +349,31 @@ private:
 # endif
   // n从1算起，根据区块大小决定使用第n号free_list
   static  size_t _S_freelist_index(size_t __bytes) {
+    /**
+     * 这行代码是计算索引的核心。这里涉及的计算是一个常见的向上取整操作，
+     * 用于确定给定字节数所属的内存块大小类别。
+     * (size_t)_ALIGN 表示内存对齐的边界。
+     * 内存对齐是一种优化技术，用于提高内存访问的效率。
+     * 通常，内存块会被分配为某个特定的大小的倍数（如 8 字节、16 字节等）。
+     * (__bytes + (size_t)_ALIGN - 1) 部分实现了向上取整。
+     * 这确保了即使请求的字节数不是 _ALIGN 的倍数时，也能获得足够大的、对齐的内存块。
+     * 整个表达式最后除以 (size_t)_ALIGN 并减 1，得到对应的索引值。
+    */
         return (((__bytes) + (size_t)_ALIGN-1)/(size_t)_ALIGN - 1);
   }
 
-  // 传回一个大小为 n的对象，并可能加入大小为 n的其它区块到  free_list
+  // 传回一个大小为 n 的对象，并可能加入大小为 n 的其它区块到 free_list
   // Returns an object of size __n, and optionally adds to size __n free list.
   static void* _S_refill(size_t __n);
-  // 配置㆒大块空间，可容纳 nobjs个大小为 "size"的区块。
-  // 如果配置 nobjs个区块有所不便，nobjs可能会降低。
+  // 配置一大块空间，可容纳 nobjs 个大小为 "size"的区块。
+  // 如果配置 nobjs 个区块有所不便，nobjs 可能会降低。
   // Allocates a chunk for nobjs of size size.  nobjs may be reduced
   // if it is inconvenient to allocate the requested number.
   static char* _S_chunk_alloc(size_t __size, int& __nobjs);
 
   // Chunk allocation state.
-  static char* _S_start_free; //记忆池起始位置。只在 chunk_alloc()㆗变化
-  static char* _S_end_free;  //记忆池结束位置。只在 chunk_alloc()㆗变化
+  static char* _S_start_free; //记忆池起始位置。只在 chunk_alloc() 中变化
+  static char* _S_end_free;  //记忆池结束位置。只在 chunk_alloc() 中变化
   static size_t _S_heap_size;
 
 # ifdef __STL_THREADS
