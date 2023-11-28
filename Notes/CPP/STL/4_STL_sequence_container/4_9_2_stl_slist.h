@@ -151,7 +151,7 @@ struct _Slist_iterator : public _Slist_iterator_base
   typedef _Slist_node<_Tp> _Node;
 
   _Slist_iterator(_Node* __x) : _Slist_iterator_base(__x) {}
-  //呼叫 slist<T>::end()时会造成 __slist_iterator(0)，于是唤起上述函式。
+  // 调用 slist<T>::end() 时会造成 __slist_iterator(0)，于是调用上述函数。
   // 看不懂上面的注解
   _Slist_iterator() : _Slist_iterator_base(0) {}
   _Slist_iterator(const iterator& __x) : _Slist_iterator_base(__x._M_node) {}

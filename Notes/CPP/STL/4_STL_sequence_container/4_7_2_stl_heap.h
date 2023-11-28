@@ -151,7 +151,7 @@ __pop_heap_aux(_RandomAccessIterator __first, _RandomAccessIterator __last,
   //以上，根据 implicit representation heap的次序特性，pop动作的结果
   //应为底部容器的第一个元素。因此，首先设定欲调整值为尾值，然后将首值调至
   //尾节点（所以以上将迭代器 result设为 last-1）。然后重整 [first, last-1)，
-  //使之重新成㆒个合格的 heap。
+  //使之重新成一个合格的 heap。
 }
 
 // 取出最大值
@@ -278,7 +278,7 @@ make_heap(_RandomAccessIterator __first,
               __VALUE_TYPE(__first), __DISTANCE_TYPE(__first));
 }
 
-//每执行一次 pop_heap()，极值（在 STL heap㆗为极大值）即被放在尾端。
+//每执行一次 pop_heap()，极值（在 STL heap中为极大值）即被放在尾端。
 //扣除尾端再执行一次 pop_heap()，次极值又被放在新尾端。最后即得
 //排序结果。
 template <class _RandomAccessIterator>
