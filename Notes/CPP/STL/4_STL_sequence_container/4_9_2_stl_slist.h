@@ -328,7 +328,7 @@ class slist : private _Slist_base<_Tp,_Alloc>
 private:
   typedef _Slist_base<_Tp,_Alloc> _Base;
 public:
-  typedef _Tp                value_type;
+  typedef _Tp               value_type;
   typedef value_type*       pointer;
   typedef const value_type* const_pointer;
   typedef value_type&       reference;
