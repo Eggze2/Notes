@@ -132,3 +132,5 @@ pip临时使用：>>pip install pythonModuleName -i <换源地址>
 
 移除pip源(如官方PyPi源)：>>pqi remove pypi
 
+pip添加代理：pip install package_name --proxy=http://your_proxy_server:port
+
