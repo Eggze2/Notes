@@ -1,0 +1,32 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.rh": "cpp",
+        "algorithm": "cpp",
+        "deque": "cpp",
+        "exception": "cpp",
+        "list": "cpp",
+        "locale": "cpp",
+        "memory": "cpp",
+        "mutex": "cpp",
+        "span": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "unordered_map": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "pthread_alloc": "cpp",
+        "string": "cpp"
+    }
+}
