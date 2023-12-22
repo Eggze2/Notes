@@ -623,6 +623,8 @@ lexicographical_compare(const unsigned char* __first1,
                         const unsigned char* __first2,
                         const unsigned char* __last2)
 {
+  // 在C++中，unsigned char* 可以作为指向任何对象的字节级别指针。
+  // 这种通用性和可靠性使得该特化版本在比较不同数据类型的范围时更加鲁棒
   const size_t __len1 = __last1 - __first1; // 第一序列长度
   const size_t __len2 = __last2 - __first2; // 第二序列长度
   // 比较相同长度的一段，使用memcmp
