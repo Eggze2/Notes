@@ -103,7 +103,7 @@ inline void swap(_Tp& __a, _Tp& __b) {
 
 #if !defined(__BORLANDC__) || __BORLANDC__ >= 0x540 /* C++ Builder 4.0 */
 
-#undef min
+#undef min  // 有些编译器定义了min和max，先取消定义
 #undef max
 
 template <class _Tp>
@@ -133,11 +133,10 @@ inline const _Tp& max(const _Tp& __a, const _Tp& __b, _Compare __comp) {
 //--------------------------------------------------
 // copy
 
-// All of these auxiliary functions serve two purposes.  (1) Replace
-// calls to copy with memmove whenever possible.  (Memmove, not memcpy,
-// because the input and output ranges are permitted to overlap.)
-// (2) If we're using random access iterators, then write the loop as
-// a for loop with an explicit count.
+// 以上辅助函数有两个目的：
+// 1. 尽可能使用 memmove 代替 copy，因为 memmove 可以处理重叠区间
+// 2. 如果使用随机访问迭代器，使用 for 循环，而不是 while 循环
+
 
 // InputIterator版本
 template <class _InputIter, class _OutputIter, class _Distance>
@@ -174,7 +173,7 @@ __copy_trivial(const _Tp* __first, const _Tp* __last, _Tp* __result) {
   return __result + (__last - __first);
 }
 
-#if defined(__STL_FUNCTION_TMPL_PARTIAL_ORDER)
+#if defined(__STL_FUNCTION_TMPL_PARTIAL_ORDER)  
 
 template <class _InputIter, class _OutputIter>
 inline _OutputIter __copy_aux2(_InputIter __first, _InputIter __last,

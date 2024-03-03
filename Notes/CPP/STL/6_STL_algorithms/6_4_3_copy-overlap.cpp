@@ -39,7 +39,7 @@ int main() {
 
         auto first = id.begin();
         auto last = id.end();
-        ++++first; // advance(first, 2);
+        ++++first; // first += 2;
         cout << *first << endl;
         ----last;
         cout << *last << endl;
