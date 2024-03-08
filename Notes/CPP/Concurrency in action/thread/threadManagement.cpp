@@ -16,6 +16,28 @@ void some_other_function() {
     }
 }
 
+// 类似 std::unique_ptr 会独占拥有对象的所有权。在函数内部创建的 std::unique_ptr 
+// 可以在函数返回时将所有权传递给调用者。这是通过移动构造函数来实现的，
+// 确保资源的所有权被正确传递，而不是进行拷贝
+// 当返回局部变量时，编译器会尝试使用移动构造函数来避免性能开销。
+// 如果类没有拷贝构造函数，编译器将尝试使用移动构造函数。
+// 此处的 std::thread 类没有拷贝构造函数，因此在返回 std::thread 对象时
+// 将使用移动构造函数，有助于在传递对象给返回的线程的同时，最小化资源的复制
+std::thread f() {
+    return std::thread(some_function);
+}
+
+void param_function(int a) {
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }    
+}
+
+std::thread g() {
+    std::thread t(param_function, 43);
+    return t;
+}
+
 int main() {
     // 1 t1绑定some_function
     std::thread t1(some_function);
