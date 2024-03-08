@@ -2,18 +2,18 @@
 
 [Git 各类错误处理](#git-各类错误处理)\
       - [0 命令行操作仓库常见命令](#0-命令行操作仓库常见命令)\
-      - [1 报错 “在签出前，请清理存储库工作树。”](#1-报错-在签出前请清理存储库工作树)\
-      - [2 报错 “fatal: unable to access ‘https://github.com/…’: OpenSSL SSL\_read: Connection was reset, errno 10054”](#2-报错-fatal-unable-to-access-httpsgithubcom-openssl-ssl_read-connection-was-reset-errno-10054)\
-      - [3 报错 “fatal: bad boolean config value ‘“false”’ for ‘http.sslverify’”](#3-报错-fatal-bad-boolean-config-value-false-for-httpsslverify)\
-      - [4 报错 “Git:fatal:unable to access https://github.com/…':Failed to connect to github.com port 443 after 21086 ms: Timed out”](#4-报错-gitfatalunable-to-access-httpsgithubcomfailed-to-connect-to-githubcom-port-443-after-21086-ms-timed-out)\
-      - [5 报错 “fatal: ‘origin’ does not appear to be a git repository”](#5-报错-fatal-origin-does-not-appear-to-be-a-git-repository)\
-      - [6 报错 “fatal: Not a git repository (or any of the parent directories): .git”](#6-报错-fatal-not-a-git-repository-or-any-of-the-parent-directories-git)\
-      - [7 报错 “error: failed to push some refs to ‘https://github.com/仓库名’ ”](#7-报错-error-failed-to-push-some-refs-to-httpsgithubcom仓库名-)\
-      - [8 报错 “fatal: unable to access ‘https://git.liuzhen007.com/boffmpeg.git/’: The requested URL returned error: 403”](#8-报错-fatal-unable-to-access-httpsgitliuzhen007comboffmpeggit-the-requested-url-returned-error-403)\
-      - [8 在vscode里修改分支名](#8-在vscode里修改分支名)\
-      - [9 命令“git commit”之后弹出窗口并“hint: Waiting for your editor to close the file…”](#9-命令git-commit之后弹出窗口并hint-waiting-for-your-editor-to-close-the-file)\
-      - [10 命令“git pull”之后报错“error: You have not concluded your merge (MERGE\_HEAD exists).”](#10-命令git-pull之后报错error-you-have-not-concluded-your-merge-merge_head-exists)\
-      - [11 同步node代码，忽略node\_modules文件夹](#11-同步node代码忽略node_modules文件夹)\
+            - [1 报错 “在签出前，请清理存储库工作树。”](#1-报错-在签出前请清理存储库工作树)\
+            - [2 报错 “fatal: unable to access ‘https://github.com/…’: OpenSSL SSL\_read: Connection was reset, errno 10054”](#2-报错-fatal-unable-to-access-httpsgithubcom-openssl-ssl_read-connection-was-reset-errno-10054)\
+                  - [3 报错 “fatal: bad boolean config value ‘“false”’ for ‘http.sslverify’”](#3-报错-fatal-bad-boolean-config-value-false-for-httpsslverify)\
+                  - [4 报错 “Git:fatal:unable to access https://github.com/…':Failed to connect to github.com port 443 after 21086 ms: Timed out”](#4-报错-gitfatalunable-to-access-httpsgithubcomfailed-to-connect-to-githubcom-port-443-after-21086-ms-timed-out)\
+                        - [5 报错 “fatal: ‘origin’ does not appear to be a git repository”](#5-报错-fatal-origin-does-not-appear-to-be-a-git-repository)\
+                        - [6 报错 “fatal: Not a git repository (or any of the parent directories): .git”](#6-报错-fatal-not-a-git-repository-or-any-of-the-parent-directories-git)\
+                              - [7 报错 “error: failed to push some refs to ‘https://github.com/仓库名’ ”](#7-报错-error-failed-to-push-some-refs-to-httpsgithubcom仓库名-)\
+                              - [8 报错 “fatal: unable to access ‘https://git.liuzhen007.com/boffmpeg.git/’: The requested URL returned error: 403”](#8-报错-fatal-unable-to-access-httpsgitliuzhen007comboffmpeggit-the-requested-url-returned-error-403)\
+                                    - [8 在vscode里修改分支名](#8-在vscode里修改分支名)\
+                                    - [9 命令“git commit”之后弹出窗口并“hint: Waiting for your editor to close the file…”](#9-命令git-commit之后弹出窗口并hint-waiting-for-your-editor-to-close-the-file)\
+                                          - [10 命令“git pull”之后报错“error: You have not concluded your merge (MERGE\_HEAD exists).”](#10-命令git-pull之后报错error-you-have-not-concluded-your-merge-merge_head-exists)\
+                                          - [11 同步node代码，忽略node\_modules文件夹](#11-同步node代码忽略node_modules文件夹)\
 
 
 #### 0 命令行操作仓库常见命令
