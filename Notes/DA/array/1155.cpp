@@ -2,15 +2,10 @@
 #include <vector>
 
 const int N = 8;
-const std::vector<int> Arr1 = {0, 2, 5, 7};
-const std::vector<int> Arr2 = {1, 3, 4, 6};
+const std::vector<int> Vertices1 = {0, 2, 5, 7};
+const std::vector<int> Vertices2 = {1, 3, 4, 6};
 
 std::vector<int> v(N, 0);
-
-void Input() {
-    for (int i = 0; i < N; i++)
-        std::cin >> v[i];
-}
 
 void Generate(int x, int y) {
     v[x]++;
@@ -34,20 +29,21 @@ void Move(int St, int Ed) {
 }
 
 int main() {
-    Input();
+    for (int i = 0; i < N; i++)
+        std::cin >> v[i];
     int a = 0, b = 0;
-    for (int i : Arr1)
+    for (int i : Vertices1)
         a += v[i];
-    for (int i : Arr2)
+    for (int i : Vertices2)
         b += v[i];
 
     if (a != b)
         std::cout << "IMPOSSIBLE\n";
     else {
-        for (int i : Arr1)
+        for (int i : Vertices1)
             if (i)
                 Move(i, 0);
-        for (int i : Arr2)
+        for (int i : Vertices2)
             if (i != 4)
                 Move(i, 4);
         while (v[0])
