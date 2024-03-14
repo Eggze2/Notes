@@ -1,12 +1,8 @@
 ## 背景
 
-之前写过一篇 [如何在 Linux 上优雅的使用 Clash？ ](https://blog.zzsqwq.cn/posts/how-to-use-clash-on-linux/)的博客，不过用了一段时间后这么倒腾还是不如直接用 Clash For Windows 这种方便的图形化界面，主要是改配置文件啥的方便，不需要重启啥的。
-
-配了一下发现 Linux 版本的 Clash For Windows 貌似打开 Start with Linux 没什么用处，因此顺便写个配置教程。
-
 Clash For Windows 的具体使用可以查看官方教程：https://docs.cfw.lbyczf.com/
 
-顺便说一句，Linux 版本的无法自动设置系统代理，需要自己手动设置，不过我推荐你使用 `proxychains` 等工具在终端进行代理，使用 `SwitchyOmega`  等工具在浏览器端代理。
+顺便说一句，Linux 版本的无法自动设置系统代理，需要自己手动设置，不过推荐使用 `proxychains` 等工具在终端进行代理，使用 `SwitchyOmega`  等工具在浏览器端代理。
 
 ## 安装 Clash For Windows
 
@@ -14,7 +10,7 @@ Clash For Windows 的具体使用可以查看官方教程：https://docs.cfw.lby
 
 Github release 链接：https://github.com/Fndroid/clash_for_windows_pkg/releases
 
-在其中找到需要的版本，然后下载即可，如果国内下载较慢的话，可以使用大佬提供的代理[^1]，使用方式是在下载链接的前面加上 `https://ghproxy.com/` 即可，例如一个下载链接为 `https://github.com/aaa` ，则代理后的链接为 `https://ghproxy.com/https://github.com/aaa`
+在其中找到需要的版本，然后下载即可
 
 下载后应该是名为 `Clash.for.Windows-version-x64-linux.tar.gz` 的文件，然后解压：
 
@@ -64,7 +60,7 @@ StartupNotify=true
 sudo chmod +x ~/.local/share/applications/clash.desktop
 ```
 
-这里也是在 `.local` 文件夹下操作的，这样只会影响到当前环境，当然你也可以在 `/usr/share/applications` 路径下创建。可以在这里[^2] 找到对应的 Clash Logo，在 Icon 那里设置图标路径即可，如果还是不行，可以找到这个文件然后右键->属性，点击图标更改。
+这里也是在 `.local` 文件夹下操作的，这样只会影响到当前环境，当然你也可以在 `/usr/share/applications` 路径下创建。可以在这里[^1] 找到对应的 Clash Logo，在 Icon 那里设置图标路径即可，如果还是不行，可以找到这个文件然后右键->属性，点击图标更改。
 
 ## 配置开机自启动
 
@@ -106,6 +102,5 @@ sudo chmod +x ~/.local/share/applications/clash.desktop
 sudo chmod +x /etc/xdg/autostart/cfw.desktop
 ```
 
-[^1]: https://ghproxy.com/
-[^2]: https://zh.wikipedia.org/zh-sg/File:Clash_Logo.png
+[^1]: https://zh.wikipedia.org/zh-sg/File:Clash_Logo.png
 
