@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "f:/Codes/GitHub/Notes/Notes/DA/array",
-      "program": "f:/Codes/GitHub/Notes/Notes/DA/array/build/Debug/outDebug",
+      "cwd": "d:/Codes/GitHub/Notes/Notes/DA/exercises 378188LU",
+      "program": "d:/Codes/GitHub/Notes/Notes/DA/exercises 378188LU/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
