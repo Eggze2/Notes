@@ -112,46 +112,61 @@
 // }
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
 using namespace std;
-typedef long long LL;
-typedef double DB;
-#define For(i, s, t) for(int i = (s); i <= (t); i++)
-#define Ford(i, s, t) for(int i = (s); i >= (t); i--)
-#define Rep(i, t) for(int i = (0); i < (t); i++)
-#define Repd(i, t) for(int i = ((t)-1); i >= (0); i--)
-#define rep(i, s, t) for(int i = (s); i < (t); i++)
 
 struct Point {
-    LL x, y;
+    long long x, y;
     int id;
 };
 
 vector<Point> points;
-//theta p1 < p2 ?
-bool cross(Point p1, Point p2) {
-    return ((p1.x - points[0].x) * (p2.y - points[0].y) - (p2.x - points[0].x) * (p1.y - points[0].y)) >= 0;
+
+// 比较函数，用于根据极角排序
+bool compareByPolarAngle(const Point& p1, const Point& p2) {
+    return ((p1.x - points[0].x) * (p2.y - points[0].y) - (p2.x - points[0].x) * (p1.y - points[0].y)) > 0;
+}
+
+// 手动实现排序函数（类似于插入排序）
+void sortPointsByPolarAngle(vector<Point>& points, int start, int end) {
+    for (int i = start + 1; i < end; i++) {
+        Point key = points[i];
+        int j = i - 1;
+        while (j >= start && compareByPolarAngle(key, points[j])) {
+            points[j + 1] = points[j];
+            j--;
+        }
+        points[j + 1] = key;
+    }
 }
 
 int main() {
-    LL X_MAX = 1000001; LL Y_MAX = 1000001;
-    int N, leftlowID;
+    int N;
     cin >> N;
     points.resize(N);
-    Rep(i, N) {
+
+    // 读取点并找到最左下的点
+    Point leftLowest = { LLONG_MAX, LLONG_MAX, -1 };
+    for (int i = 0; i < N; i++) {
         cin >> points[i].x >> points[i].y;
         points[i].id = i + 1;
-        if (points[i].x < X_MAX || (points[i].x == X_MAX && points[i].y < Y_MAX))
-        {
-            leftlowID = points[i].id;
-            X_MAX = points[i].x;
-            Y_MAX = points[i].y;
+        if (points[i].x < leftLowest.x || (points[i].x == leftLowest.x && points[i].y < leftLowest.y)) {
+            leftLowest = points[i];
         }
-
     }
-    swap(points[leftlowID - 1], points[0]);
-    sort(points.begin() + 1, points.end(), cross);
-    cout << leftlowID << " " << points[N / 2].id;
+
+    // 将最左下的点交换到第一个位置
+    for (int i = 0; i < N; i++) {
+        if (points[i].id == leftLowest.id) {
+            swap(points[0], points[i]);
+            break;
+        }
+    }
+
+    // 根据极角对点进行排序
+    sortPointsByPolarAngle(points, 1, N);
+
+    // 输出结果
+    cout << leftLowest.id << " " << points[N / 2].id << endl;
     return 0;
 }
