@@ -133,7 +133,7 @@ CAN 数据帧的总位数取决于它使用标准帧格式还是拓展帧格式�
 
 
 
-![image-20240416103729993](C:\Users\Steven Cao\AppData\Roaming\Typora\typora-user-images\image-20240416103729993.png)
+![filter.png](https://github.com/Eggze2/Notes/blob/main/Notes/STM32/can%E9%80%9A%E4%BF%A1/filter.png?raw=true)
 
 ### 掩码（Mask）
 
