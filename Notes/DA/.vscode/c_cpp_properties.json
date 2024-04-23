@@ -10,10 +10,26 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "D:\\msys64\\mingw64\\bin\\g++",
-            "cStandard": "c11",
-            "cppStandard": "gnu++17",
+            "windowsSdkVersion": "10.0.22621.0",
+            "compilerPath": "D:/msys64/mingw64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
             "intelliSenseMode": "windows-gcc-x64"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.22621.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
         }
     ],
     "version": 4
