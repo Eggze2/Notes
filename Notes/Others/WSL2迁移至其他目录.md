@@ -18,5 +18,5 @@ wsl --unregister Ubuntu
 wsl --import Ubuntu D:\ubuntu\ D:\ubuntu.tar --version 2
 
 (6) 设置默认用户
-ubuntu.exe config --default-user <username>  
+ubuntu.exe config --default-user (username)  
 如果是ubuntu20.04 就是ubuntu2004.exe
