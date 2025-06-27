@@ -1,11 +1,6 @@
 # Git 操作
 
-- [Git 操作](#git-操作)\
-     - [用户设置](#用户设置)\
-       - [文件操作](#文件操作)\
-         - [重命名文件](#重命名文件)\
-         - [更新远程代码到本地仓库](#更新远程代码到本地仓库)\
-         - [解决Failed to connect to github.com port 443: Operation timed out](#解决failed-to-connect-to-githubcom-port-443-operation-timed-out)
+[TOC]
 
 ### 用户设置
 
@@ -57,7 +52,7 @@
 
 可以使用 `git config --list` 命令来查看当前配置的详细信息，包括所有级别的配置项
 
-------
+___
 
 
 
@@ -138,7 +133,7 @@
 
    做完这一步，你 GitHub 上的 Fork 就和原始项目完全同步了！
 
-------
+___
 
 
 
@@ -174,16 +169,16 @@
 
 5. **创建新的 Pull Request**：去你 GitHub/Gitee 的 Fork 页面，你将看到一个黄色的提示条，引导你从 `fix-some-bug-or-add-feature` 分支向 `upstream` 项目的 `main` 分支发起一个新的 PR。
 
-------
+___
 
 
 
-#### 解决Failed to connect to github.com port 443: Operation timed out
+### 解决Failed to connect to github.com port 443: Operation timed out
 
 ```bash
 git config --global http.proxy http://127.0.0.1:7890
 git config --global https.proxy https://127.0.0.1:7890
 ```
 
-------
+___
 
